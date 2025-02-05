@@ -1,8 +1,9 @@
 let data;
 let cleanedData = [];
-let femaleScores;
-let maleScores;
-let ageGroups;
+// let femaleScores;
+// let maleScores;
+// let ageGroups;
+let charts = [];
 
 
 function preload(){
@@ -10,43 +11,21 @@ function preload(){
 }
  
 function setup(){
-    createCanvas(500,500);
+    createCanvas(1500,1500);
     angleMode(DEGREES);
     noLoop();
     cleanData();
+
+    charts.push(new BarChart(cleanedData, "Age_Group", "Female", 400, 400, 10 , 15, -1, 100, 450));
+    
+    charts.push(new BarChart(cleanedData, "Age_Group", "Male", 400, 400, 10 , 15, -1, 600, 450));
+
+    charts.push(new BarChart(cleanedData, "Age_Group", "Total", 400, 800, 30 , 15, -1, 150, 950));
 }
  
 function draw(){
     background(25,90,200)
-
-    push();
-    translate(chartPosX, chartPosY);
-    noFill();
-    stroke(axisColour);
-    strokeWeight(axisThickness);
-    line(0,0,0,-chartHeight)
-    line(0,0,chartWidth,0)
-    
-    push()
-    translate(margin, 0)
-    for(let i=0; i<femaleScores.length; i++){
-        let xPos = (barWidth + gap) *i;
-        fill(barColour);
-        noStroke();
-        rect(xPos,0,barWidth,-femaleScores[i] * scaler);
-
-        textAlign(LEFT, CENTER);
-        textSize(10);
-        push();
-        rotate(90);
-        text(ageGroups[i], 10, -(xPos + (barWidth / 2 )));
-        pop();
-
-    }
-    pop()
-    pop()
-
-
+    charts.forEach(chart => chart.render());
 }
 
 
