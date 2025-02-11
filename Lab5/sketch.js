@@ -16,16 +16,35 @@ function setup(){
     noLoop();
     cleanData();
 
-    charts.push(new BarChart(cleanedData, "Age_Group", "Female", 400, 400, 10 , 15, -1, 100, 450));
-    
-    charts.push(new BarChart(cleanedData, "Age_Group", "Male", 400, 400, 10 , 15, -1, 600, 450));
+    charts.push(new BarChart({
+        data:cleanedData, 
+        xValue: "Age_Group", 
+        yValue: "Female", 
+    }
+    ));
 
-    charts.push(new BarChart(cleanedData, "Age_Group", "Total", 400, 800, 30 , 15, -1, 150, 950));
+    charts.push(new BarChart({
+        data:cleanedData, 
+        xValue: "Age_Group", 
+        yValue: "Male",
+        chartPosX: 600
+    }
+    ));
+    
+    
+    // charts.push(new BarChart(cleanedData, "Age_Group", "Male", 400, 400, 10 , 15, -1, 600, 450));
+
+    // charts.push(new BarChart(cleanedData, "Age_Group", "Total", 400, 800, 30 , 15, -1, 150, 950));
 }
  
 function draw(){
     background(25,90,200)
-    charts.forEach(chart => chart.render());
+    charts.forEach(chart => {
+        chart.renderBars();
+        chart.renderAxis();
+        chart.renderLabels();
+        chart.renderTicks();
+    });
 }
 
 
