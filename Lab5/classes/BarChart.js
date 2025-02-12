@@ -15,9 +15,9 @@ class BarChart{
         this.axisThickness = obj.axisThickness || -1;
         this.chartPosX = obj.chartPosX || 100;
         this.chartPosY = obj.chartPosY || 450;
-        this.axisColour = color(200,200,200);
-        this.barColour = color(random(100,255), random(100,255), random(100,255));
-        this.axisTextColour = this.barColour;
+        this.axisColour = color(0,0,0);
+        this.barColour = color(random(100,250), random(100,250), random(100,250));
+        this.axisTextColour = color(0,0,0);
         
     }
 
@@ -29,7 +29,7 @@ class BarChart{
                         for(let i=0; i<this.data.length; i++){
                             let xPos = (this.barWidth + this.gap) *i;
                             fill(this.barColour);
-                            noStroke();
+                            stroke(0,0,0);
                             rect(xPos,0,this.barWidth,-this.data[i][this.yValue] * this.scaler);
                         }
                 pop()
@@ -69,9 +69,16 @@ class BarChart{
         pop();
     }
 
-    // tickNumber
-    // axisTickThickness
-
+    renderChartLabel(){
+        push()
+        fill(0,0,0);
+        translate(this.chartPosX, this.chartPosY);
+        textAlign(CENTER);
+        text("Displaying: " + this.yValue + " data", this.chartWidth / 2, -this.chartHeight - 10 );
+        console.log(this.chartHeight);
+        pop();
+    };
+    
 
     renderTicks(){
         push()
@@ -87,13 +94,14 @@ class BarChart{
 
             // Step 3: Determine tick interval
             let tickIncrement = this.chartHeight / 5;
-            let valueIncrement = roundedMax / 5;
+            let valueIncrement = Math.ceil(roundedMax / 5 / 10) * 10;
 
             for(let i = 0; i <= 5; i++){
                 let yPos = -tickIncrement * i;
                 
                 // Draw tick marks
                 line(0, yPos, -10, yPos);
+                line(0, yPos, this.chartWidth, yPos);
                 noFill();
                 // noStroke();
                 textAlign(RIGHT, CENTER);
@@ -101,9 +109,9 @@ class BarChart{
                 text((valueIncrement * i).toFixed(0), -15, yPos);
             }
 
-pop();
-}
-}
+    pop();
+    }
+    }
 
 
     // this.chartHeight = 300;

@@ -6,10 +6,36 @@
 		<script src="libraries/p5.min.js"></script>
 		<script src="classes/Friend.js"></script>
 		<script src="classes/BarChart.js"></script>
-		<script src="sketch.js"></script>
+
 	</head>
 	<body>
 		<h1>Lab 5: Classes and shit</h1>
 		<p>Pt:2 The Final Chartening</p>
+		<div class="testMe">
+			<form>
+				<label for="optionOne">Male</label>
+				<input type="radio" id="optionOne" name="data_type" value="optionOne">
+				<label for="optionTwo">Female</label>
+				<input type="radio" id="optionTwo" name="data_type" value="optionTwo">
+				<label for="optionThree">Total</label>
+				<input type="radio" id="optionThree" name="data_type" value="optionThree">
+				<hr>
+				<ul>
+				
+					<li>
+						<label for="chartHeight">Chart Height</label>
+						<input type="text" id="chartHeight">
+					</li>
+					<li>
+						<label for="chartHeight">Chart Width</label>
+						<input type="text" id="chartWidth">
+					</li>
+
+				</ul>
+				<input type="submit" value="Submit">
+				
+			</form>
+		</div>
 	</body>
+	<script src="js/sketch.js"></script>
 </html>
