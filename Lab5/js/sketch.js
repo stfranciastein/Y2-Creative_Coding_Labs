@@ -29,12 +29,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 xValue: "Age_Group",
                 yValue: "Female",
             }));
-        } else if (thirdData.checked){
-            charts.push(new BarChart ({
+        } else if (thirdData.checked) {
+            charts.push(new StackedBarChart({
                 data: cleanedData,
                 xValue: "Age_Group",
-                yValue: "Total",
-            }))
+                yValues: ["Male", "Female", "Total"], // Stacked values
+            }));
         }
 
         redraw(); // Forces the canvas to update
@@ -64,8 +64,22 @@ function draw() {
         chart.renderAxis();
         chart.renderLabels();
         chart.renderTicks();
-        chart.renderBars();
+
+        //The reason your linechart wasn't showing up before was because you were still rendering bars during debugging.
+        //To get the linechart to show up, you need to only render bars if you have a barchart. Remember this for future chart types pls thanks.
+        if (chart instanceof BarChart || chart instanceof StackedBarChart) {
+            chart.renderBars(); 
+        }
+
+        if (chart instanceof LineChart) {
+            chart.renderLines();
+            chart.renderPoints();
+        }
+
+
         chart.renderChartLabel();
+        chart.renderLines();
+        chart.renderPoints();
     });
 }
 
