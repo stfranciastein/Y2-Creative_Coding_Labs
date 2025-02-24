@@ -8,7 +8,7 @@ class HorizontalBarChart {
         this.barHeight = obj.barHeight || 10;
         this.margin = obj.margin || 15;
         
-        this.gap = (this.chartWidth - (this.data.length * this.barHeight) - (this.margin * 2)) / (this.data.length - 1);
+        this.gap = (this.chartHeight - (this.data.length * this.barHeight) - (this.margin * 2)) / (this.data.length - 1);
         this.scaler = this.chartWidth / Math.max(...this.data.map(row => row[this.yValue]));
         
         this.axisThickness = obj.axisThickness || -1;
@@ -17,6 +17,9 @@ class HorizontalBarChart {
         this.axisColour = color(0, 0, 0);
         this.barColour = color(random(100, 250), random(100, 250), random(100, 250));
         this.axisTextColour = color(0, 0, 0);
+
+        // Customizable Tick Count
+        this.tickCount = obj.tickCount || 5;
     }
 
     renderBars() {
@@ -83,15 +86,16 @@ class HorizontalBarChart {
         
         let maxValue = Math.max(...this.data.map(row => row[this.yValue]));
         let roundedMax = Math.ceil(maxValue / 10) * 10;
-        let tickIncrement = this.chartWidth / 5;
-        let valueIncrement = Math.ceil(roundedMax / 5 / 10) * 10;
 
-        for (let i = 0; i <= 5; i++) {
+        let tickIncrement = this.chartWidth / this.tickCount;
+        let valueIncrement = Math.ceil(roundedMax / this.tickCount / 10) * 10;
+
+        for (let i = 0; i <= this.tickCount; i++) {
             let xPos = tickIncrement * i;
 
             line(xPos, 0, xPos, -this.chartHeight);
-            
             line(xPos, 0, xPos, 10);
+
             textAlign(CENTER, TOP);
             textSize(10);
             text((valueIncrement * i).toFixed(0), xPos, 15);

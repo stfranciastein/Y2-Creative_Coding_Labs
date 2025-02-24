@@ -17,6 +17,9 @@ class LineChart {
         this.axisColour = color(0, 0, 0);
         this.lineColour = color(random(100, 250), random(100, 250), random(100, 250));
         this.axisTextColour = color(0, 0, 0);
+
+        // Customizable Tick Count
+        this.tickCount = obj.tickCount || 5;
     }
 
     renderLines() {
@@ -94,12 +97,15 @@ class LineChart {
         translate(this.chartPosX, this.chartPosY);
         stroke(this.axisColour);
         strokeWeight(this.axisThickness);
+
         let maxValue = Math.max(...this.data.map(row => row[this.yValue]));
         let roundedMax = Math.ceil(maxValue / 10) * 10;
-        let tickIncrement = this.chartHeight / 5;
-        let valueIncrement = Math.ceil(roundedMax / 5 / 10) * 10;
 
-        for (let i = 0; i <= 5; i++) {
+        // Customizable Tick Increment
+        let tickIncrement = this.chartHeight / this.tickCount;
+        let valueIncrement = Math.ceil(roundedMax / this.tickCount / 10) * 10;
+
+        for (let i = 0; i <= this.tickCount; i++) {
             let yPos = -tickIncrement * i;
             line(0, yPos, -10, yPos);
             line(0, yPos, this.chartWidth, yPos);

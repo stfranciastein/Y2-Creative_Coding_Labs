@@ -9,6 +9,7 @@ class StackedBarChart {
 
         this.barWidth = obj.barWidth || 20;
         this.gap = (this.chartWidth - (this.data.length * this.barWidth) - (this.margin * 2)) / (this.data.length - 1);
+        
         let maxYValue = Math.max(...this.data.map(row => this.yValues.reduce((sum, key) => sum + row[key], 0)));
         this.scaler = maxYValue > 0 ? this.chartHeight / maxYValue : 1;
 
@@ -18,6 +19,9 @@ class StackedBarChart {
         this.axisColour = color(0, 0, 0);
         this.barColours = this.yValues.map(() => color(random(100, 250), random(100, 250), random(100, 250)));
         this.axisTextColour = color(0, 0, 0);
+
+        // Customizable Tick Count
+        this.tickCount = obj.tickCount || 5;
     }
 
     renderBars() {
@@ -84,12 +88,15 @@ class StackedBarChart {
         translate(this.chartPosX, this.chartPosY);
         stroke(this.axisColour);
         strokeWeight(this.axisThickness);
+
         let maxValue = Math.max(...this.data.map(row => this.yValues.reduce((sum, key) => sum + row[key], 0)));
         let roundedMax = Math.ceil(maxValue / 10) * 10;
-        let tickIncrement = this.chartHeight / 5;
-        let valueIncrement = Math.ceil(roundedMax / 5 / 10) * 10;
 
-        for (let i = 0; i <= 5; i++) {
+        // Customizable Tick Increment
+        let tickIncrement = this.chartHeight / this.tickCount;
+        let valueIncrement = Math.ceil(roundedMax / this.tickCount / 10) * 10;
+
+        for (let i = 0; i <= this.tickCount; i++) {
             let yPos = -tickIncrement * i;
             line(0, yPos, -10, yPos);
             line(0, yPos, this.chartWidth, yPos);
