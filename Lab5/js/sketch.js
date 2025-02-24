@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 data: cleanedData,
                 xValue: "Age_Group",
                 yValue: "Male",
+                tickCount: 11 // remove when finished testing!!
             }));
         } else if (secondData.checked) {
             charts.push(new BarChart({

@@ -20,7 +20,7 @@ class BarChart {
         this.axisTextColour = color(0, 0, 0);
 
         // Customizable Tick Increment
-        this.tickCount = obj.tickCount || 10;
+        this.tickCount = obj.tickCount || 5;
     }
 
     renderBars() {
