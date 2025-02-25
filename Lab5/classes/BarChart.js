@@ -58,11 +58,13 @@ class BarChart {
             let xPos = (this.barWidth + this.gap) * i;
             fill(this.axisTextColour);
             noStroke();
-            textAlign(LEFT, CENTER);
+            // textAlign(RIGHT, CENTER);
             textSize(10);
+
             push();
-            rotate(90);
-            text(this.data[i][this.xValue], 10, -(xPos + (this.barWidth / 2)));
+            translate(xPos + this.barWidth / 2, 10);
+            rotate(45);
+            text(this.data[i][this.xValue], 0, 0);
             pop();
         }
         pop();

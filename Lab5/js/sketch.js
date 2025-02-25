@@ -20,21 +20,23 @@ document.addEventListener("DOMContentLoaded", function () {
         if (firstData.checked) {
             charts.push(new BarChart({
                 data: cleanedData,
-                xValue: "Age_Group",
-                yValue: "Male",
-                tickCount: 11 // remove when finished testing!!
+                xValue: "genre",
+                yValue: "danceability",
+                barWidth: 20,
+                tickCount: 5 // remove when finished testing!!
             }));
         } else if (secondData.checked) {
-            charts.push(new BarChart({
+            charts.push(new LineChart({
                 data: cleanedData,
                 xValue: "Age_Group",
                 yValue: "Female",
             }));
         } else if (thirdData.checked) {
-            charts.push(new StackedBarChart({
+            charts.push(new AreaChart({
                 data: cleanedData,
-                xValue: "Age_Group",
-                yValues: ["Male", "Female", "Total"], // Stacked values
+                xValue: "genre",
+                chartWidth: 1000,
+                yValues: ["danceability", "energy", "valence"], // Stacked values
             }));
         }
 
@@ -49,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function preload() {
-    data = loadTable('data/Combined.csv', 'csv', 'header');
+    data = loadTable('data/tcc_ceds_music.csv', 'csv', 'header');
 }
 
 function setup() {
@@ -77,6 +79,9 @@ function draw() {
             chart.renderPoints();
         }
 
+        if (chart instanceof AreaChart) {
+            chart.renderAreas();
+        }
 
         chart.renderChartLabel();
         chart.renderLines();
@@ -85,13 +90,29 @@ function draw() {
 }
 
 function cleanData() {
+    let genreDanceability = {};
+
+    // Group by genre and sum danceability values
     for (let i = 0; i < data.rows.length; i++) {
-        cleanedData.push(data.rows[i].obj);
+        let row = data.rows[i].obj;
+        let genre = row["genre"];
+        let danceability = parseFloat(row["danceability"]);
+
+        if (!genreDanceability[genre]) {
+            genreDanceability[genre] = { sum: 0, count: 0 };
+        }
+        genreDanceability[genre].sum += danceability;
+        genreDanceability[genre].count += 1;
     }
 
-    for (let i = 0; i < cleanedData.length; i++) {
-        cleanedData[i].Female = parseInt(cleanedData[i].Female);
-        cleanedData[i].Male = parseInt(cleanedData[i].Male);
-        cleanedData[i].Total = parseInt(cleanedData[i].Total);
-    }
+    // Compute the average danceability per genre
+    cleanedData = Object.keys(genreDanceability).map(genre => ({
+        genre: genre,
+        danceability: genreDanceability[genre].sum / genreDanceability[genre].count
+    }));
+
+    // Sort genres by average danceability and keep only the top 10 for readability
+    cleanedData.sort((a, b) => b.danceability - a.danceability);
+    cleanedData = cleanedData.slice(0, 10);
 }
+
