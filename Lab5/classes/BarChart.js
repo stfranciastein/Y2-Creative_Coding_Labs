@@ -16,7 +16,7 @@ class BarChart {
         this.chartPosX = obj.chartPosX || 100;
         this.chartPosY = obj.chartPosY || 450;
         this.axisColour = color(0, 0, 0);
-        this.barColour = color(random(100, 250), random(100, 250), random(100, 250));
+        this.barColour = obj.barColour || color(random(100, 250), random(100, 250), random(100, 250));
         this.axisTextColour = color(0, 0, 0);
 
         // Customizable Tick Increment
@@ -58,12 +58,12 @@ class BarChart {
             let xPos = (this.barWidth + this.gap) * i;
             fill(this.axisTextColour);
             noStroke();
-            // textAlign(RIGHT, CENTER);
-            textSize(10);
+            textAlign(CENTER);
+            textSize(15);
 
             push();
-            translate(xPos + this.barWidth / 2, 10);
-            rotate(45);
+            translate(xPos + this.barWidth / 2, 15);
+            rotate(0);
             text(this.data[i][this.xValue], 0, 0);
             pop();
         }
@@ -72,11 +72,30 @@ class BarChart {
     }
 
     renderChartLabel() {
+        let capitalizedXValue = this.xValue.charAt(0).toUpperCase() + this.xValue.slice(1);
+
         push();
-        fill(0, 0, 0);
-        translate(this.chartPosX, this.chartPosY);
-        textAlign(CENTER);
-        text("Displaying: " + this.yValue + " data", this.chartWidth / 2, -this.chartHeight - 10);
+            fill(0, 0, 0);
+            translate(this.chartPosX, this.chartPosY);
+            textAlign(CENTER);
+            textSize(20);
+            textStyle(BOLD); //Boldens This area
+
+            //Chart Title (It's hard to not hardcode this)
+
+            text("Danceability", this.chartWidth / 2, -this.chartHeight - 30);
+
+            // X-Axis Label
+            textSize(15)
+            text(capitalizedXValue, this.chartWidth / 2, 50);
+
+            // Y-Axis Label
+            push();
+                translate(-60, -this.chartHeight / 2);
+                rotate(-90);
+                text("Percentage", 0, 0);
+            pop();
+            textStyle(NORMAL); //Stops Bolding
         pop();
     }
 
@@ -86,33 +105,37 @@ class BarChart {
         noFill();
         stroke(this.axisColour);
         strokeWeight(this.axisThickness);
-        // Step 1: Find the max value in the dataset
-        
+    
+        // Find the max value in dataset
         let maxValue = Math.max(...this.data.map(row => row[this.yValue]));
-
-        // Step 2: Round max value up to nearest 10
-        let roundedMax = Math.ceil(maxValue / 10) * 10;
-
-        // Customizable Tick Increment
+    
+        console.log(`Max ${this.yValue}:`, maxValue);
+    
+        let roundedMax = Math.ceil(maxValue / 5) * 5; // Round to nearest 5 for better scaling
         let tickIncrement = this.chartHeight / this.tickCount;
-        let valueIncrement = Math.ceil(roundedMax / this.tickCount / 10) * 10;
-
+        let valueIncrement = roundedMax / this.tickCount;
+    
         for (let i = 0; i <= this.tickCount; i++) {
             let yPos = -tickIncrement * i;
-
-            // Draw tick marks
             line(0, yPos, -10, yPos);
             line(0, yPos, this.chartWidth, yPos);
-
             noFill();
             textAlign(RIGHT, CENTER);
             textSize(10);
-            text((valueIncrement * i).toFixed(0), -15, yPos);
+    
+            let valueLabel = (this.yValue === "danceability" || this.yValue === "instrumentalness" || 
+                              this.yValue === "valence" || this.yValue === "energy" || 
+                              this.yValue === "acousticness") 
+                             ? (valueIncrement * i).toFixed(0) + "%" 
+                             : (valueIncrement * i).toFixed(0);
+    
+            text(valueLabel, -15, yPos);
         }
         pop();
-    }
+    }    
 }
 
+    //Default Values don't delete for notation purposes.
     // this.chartHeight = 300;
     // this.chartWidth = 300;
     // this.barWidth = 10;

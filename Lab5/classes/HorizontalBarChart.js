@@ -15,7 +15,7 @@ class HorizontalBarChart {
         this.chartPosX = obj.chartPosX || 100;
         this.chartPosY = obj.chartPosY || 450;
         this.axisColour = color(0, 0, 0);
-        this.barColour = color(random(100, 250), random(100, 250), random(100, 250));
+        this.barColour = obj.barColour || color(random(100, 250), random(100, 250), random(100, 250));
         this.axisTextColour = color(0, 0, 0);
 
         // Customizable Tick Count
@@ -71,13 +71,29 @@ class HorizontalBarChart {
 
     renderChartLabel() {
         push();
-        fill(0, 0, 0);
-        translate(this.chartPosX, this.chartPosY);
-        textAlign(CENTER);
-        text("Displaying: " + this.yValue + " data", this.chartWidth / 2, -this.chartHeight - 10);
+            fill(0, 0, 0);
+            translate(this.chartPosX, this.chartPosY);
+            textAlign(CENTER);
+            textSize(20);
+            textStyle(BOLD);
+                
+            //Chart Title (It's hard to not hardcode this)
+            text("Songs Released Between 1950-2019", this.chartWidth / 2, -this.chartHeight - 40);
+        
+            // X-Axis Label
+            textSize(15);
+            text("Total Songs", this.chartWidth / 2, 60);
+        
+            // Y-Axis Label
+            push();
+                translate(-90, -this.chartHeight / 2);
+                rotate(-90);
+                text("Years Grouped", 0, 0);
+            pop();
+            textStyle(NORMAL);
         pop();
     }
-
+    
     renderTicks() {
         push();
         translate(this.chartPosX, this.chartPosY);

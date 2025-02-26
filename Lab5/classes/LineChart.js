@@ -15,7 +15,7 @@ class LineChart {
         this.chartPosX = obj.chartPosX || 100;
         this.chartPosY = obj.chartPosY || 450;
         this.axisColour = color(0, 0, 0);
-        this.lineColour = color(random(100, 250), random(100, 250), random(100, 250));
+        this.lineColour = obj.lineColour || color(random(100, 250), random(100, 250), random(100, 250));
         this.axisTextColour = color(0, 0, 0);
 
         // Customizable Tick Count
@@ -69,14 +69,14 @@ class LineChart {
         push();
         translate(this.chartPosX, this.chartPosY);
         fill(this.axisTextColour);
-        textSize(10);
-        textAlign(LEFT, CENTER);
+        textSize(15);
+        textAlign(CENTER, CENTER);
         
         for (let i = 0; i < this.data.length; i++) {
             let xPos = this.margin + (this.gap * i);
             push();
             translate(xPos, 15);
-            rotate(45);
+            // rotate(45);
             text(this.data[i][this.xValue], 0, 0);
             pop();
         }
@@ -84,11 +84,29 @@ class LineChart {
     }
 
     renderChartLabel() {
+        let capitalizedXValue = this.xValue.charAt(0).toUpperCase() + this.xValue.slice(1);
+
         push();
-        fill(0, 0, 0);
-        translate(this.chartPosX, this.chartPosY);
-        textAlign(CENTER);
-        text("Displaying: " + this.yValue + " data", this.chartWidth / 2, -this.chartHeight - 10);
+            fill(0, 0, 0);
+            translate(this.chartPosX, this.chartPosY);
+            textAlign(CENTER);
+            textSize(20);
+            textStyle(BOLD);
+
+            //Chart Title (It's hard to not hardcode this)
+            text("Song Instrumentality", this.chartWidth / 2, -this.chartHeight - 30);
+
+            // X-Axis Label
+            textSize(15)
+            text(capitalizedXValue, this.chartWidth / 2, 50);
+
+            // Y-Axis Label
+            push();
+                translate(-60, -this.chartHeight / 2);
+                rotate(-90);
+                text("Percentage", 0, 0);
+            pop();
+            textStyle(NORMAL);
         pop();
     }
 
@@ -111,7 +129,7 @@ class LineChart {
             line(0, yPos, this.chartWidth, yPos);
             textAlign(RIGHT, CENTER);
             textSize(10);
-            text((valueIncrement * i).toFixed(0), -15, yPos);
+            text((valueIncrement * i).toFixed(0) + "%", -15, yPos);
         }
         pop();
     }
