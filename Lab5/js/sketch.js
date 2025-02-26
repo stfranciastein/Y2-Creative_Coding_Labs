@@ -107,7 +107,7 @@ function updateChart() {
             tickCount: tickCount,
             chartPosX: chartPosX,
             chartPosY: chartPosY,
-            yValues: ["valence", "acousticness", "instrumentalness", "loudness"], // Loudness doesn't work, the value is TINY! This is why you reused  valence!
+            yValues: ["valence", "acousticness", "instrumentalness", "loudness"], // Loudness doesn't work, the value is TINY. This is why you reused valence!
             areaColours: [colourOne, colourTwo, colourThree]
         }));
     }

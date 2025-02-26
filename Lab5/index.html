@@ -28,7 +28,7 @@
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-lg">
-				<a class="navbar-brand fw-bold text-uppercase" href="#">Chart<span class="text-primary">X</span></a>
+				<a class="navbar-brand fw-bold text-uppercase" href="#">Harper<span class="text-primary">Charts</span></a>
 
 			  	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -73,7 +73,7 @@
 					<div class="tab-content border">
 						<!--Bar Chart-->
 						<div class="tab-pane fade show active" id="barChart">
-							<p class="py-1 fw-bold">Chart Dimensions</p>
+							<p class="py-1 fw-bold">Dimensions</p>
 							<ul class="list-unstyled d-lg-flex gap-1">
 								<li class="py-1">
 									<p><label for="chartHeight">Chart Height</label>
@@ -95,13 +95,13 @@
 									<label for="tickCount">Chart Tick Count</label>
 									<input type="number" id="tickCount" value="5">
 								</li>
-							</ul>
-							<p class="py-1 fw-bold">Bar Properties</p>
-							<ul class="list-unstyled d-lg-flex gap-2">
 								<li class="py-1"i>
 									<p class="mb-0"><label for="barWidth">Bar Width</label></p>
 									<input type="number" id="barWidth" value="80">
 								</li>
+							</ul>
+							<p class="py-1 fw-bold">Colours</p>
+							<ul class="list-unstyled d-lg-flex gap-2">
 								<li class="py-1">
 									<label for="colourOne">Bar Colour</label>
 									<input type="color" id="colourOne" value="#ff0000">
@@ -112,7 +112,7 @@
 						<!--Horizontal Bar Chart-->
 						<div class="tab-pane fade" id="horBarChart">
 							<p>
-							<p class="py-1 fw-bold">Chart Dimensions</p>
+							<p class="py-1 fw-bold">Dimensions</p>
 							<ul class="list-unstyled d-lg-flex gap-1">
 								<li class="py-1">
 									<p><label for="chartHeight">Chart Height</label>
@@ -134,13 +134,13 @@
 									<label for="tickCount">Chart Tick Count</label>
 									<input type="number" id="tickCount" value="20">
 								</li>
-							</ul>
-							<p class="py-1 fw-bold">Bar Properties</p>
-							<ul class="list-unstyled d-lg-flex gap-2">
 								<li class="py-1"i>
 									<p class="mb-0"><label for="barWidth">Bar Width</label></p>
 									<input type="number" id="barWidth" value="20">
 								</li>
+							</ul>
+							<p class="py-1 fw-bold">Colours</p>
+							<ul class="list-unstyled d-lg-flex gap-2">
 								<li class="py-1">
 									<label for="colourOne">Bar Colour</label>
 									<input type="color" id="colourOne" value="#0000ff">
@@ -150,8 +150,8 @@
 
 						<!--Stacked Bar Chart-->
 						<div class="tab-pane fade" id="stackedChart">
-							<p class="py-1 fw-bold">Chart Dimensions</p>
-							<ul class="list-unstyled">
+							<p class="py-1 fw-bold">Dimensions</p>
+							<ul class="list-unstyled d-lg-flex gap-1">
 								<li>
 									<label for="chartHeight">Chart Height</label>
 									<input type="number" id="chartHeight" value="400">
@@ -176,26 +176,26 @@
 									<label for="barWidth">Bar Width</label>
 									<input type="number" id="barWidth" value="100">
 								</li>
-								<hr>
-								<p class="py-2 fw-bold">Colours</p>
-								<div class="d-flex align-items-center gap-2 mb-2">
-									<label for="colourOne" class="mb-0">Colour One</label>
-									<input type="color" id="colourOne" value="#00cec9">
-								  </div>
-								  <div class="d-flex align-items-center gap-2 mb-2">
-									<label for="colourTwo" class="mb-0">Colour Two</label>
-									<input type="color" id="colourTwo" value="#d63031">
-								  </div>
-								  <div class="d-flex align-items-center gap-2 mb-2">
-									<label for="colourThree" class="mb-0">Colour Three</label>
-									<input type="color" id="colourThree" value="#ffeaa7">
-								  </div>
+							</ul>
+							<p class="py-2 fw-bold">Colours</p>
+							<div class="d-flex align-items-center gap-2 mb-2">
+								<label for="colourOne" class="mb-0">Colour One</label>
+								<input type="color" id="colourOne" value="#00cec9">
+							</div>
+							<div class="d-flex align-items-center gap-2 mb-2">
+								<label for="colourTwo" class="mb-0">Colour Two</label>
+								<input type="color" id="colourTwo" value="#d63031">
+							</div>
+							<div class="d-flex align-items-center gap-2 mb-2">
+								<label for="colourThree" class="mb-0">Colour Three</label>
+								<input type="color" id="colourThree" value="#ffeaa7">
+							</div>
 							</ul>	
 						</div>
 						
 						<!--Line Chart-->
 						<div class="tab-pane fade" id="lineChart">
-							<p class="py-1 fw-bold">Chart Dimensions</p>
+							<p class="py-1 fw-bold">Dimensions</p>
 							<ul class="list-unstyled d-lg-flex gap-1">
 								<li class="py-1">
 									<p><label for="chartHeight">Chart Height</label>
@@ -230,10 +230,10 @@
 						<!-- Area Chart -->
 						<div class="tab-pane fade" id="areaChart">
 							<p class="py-1 fw-bold">Chart Dimensions</p>
-							<ul class="list-unstyled">
+							<ul class="list-unstyled d-lg-flex gap-1">
 								<li>
 									<label for="chartHeight">Chart Height</label>
-									<input type="number" id="chartHeight" value="400">
+									<input type="number" id="chartHeight" value="600">
 								</li>
 								<li>
 									<label for="chartHeight">Chart Width</label>
@@ -245,7 +245,7 @@
 								</li>
 								<li>
 									<label for="chartPosY">Chart Y Position</label>
-									<input type="number" id="chartPosY" value="510">
+									<input type="number" id="chartPosY" value="700">
 								</li>
 								<li>
 									<label for="tickCount">Chart Tick Count</label>
@@ -253,11 +253,12 @@
 								</li>
 								<li>
 							</ul>
-							<hr>
 							<p class="py-1 fw-bold">Colours</p>
+							<p>For the area chart and stacked chart, any number of x values past 3 will be randomly coloured.</p>
+							<p>I left in loudness which is a tiny value just to show it changes everytime chartUpdate() is run</p>
 							<div class="d-flex align-items-center gap-2 mb-2">
 								<label for="colourOne" class="mb-0">Colour One</label>
-								<input type="color" id="colourOne" value="#00cec9">
+								<input type="color" id="colourOne" value="#22a2dd">
 							  </div>
 							  <div class="d-flex align-items-center gap-2 mb-2">
 								<label for="colourTwo" class="mb-0">Colour Two</label>

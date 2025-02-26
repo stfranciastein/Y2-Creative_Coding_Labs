@@ -95,7 +95,7 @@ class AreaChart {
             textStyle(BOLD);
 
             //Chart Title (It's hard to not hardcode this)
-            text("Song Moods", this.chartWidth / 2, -this.chartHeight - 70);
+            text("Production", this.chartWidth / 2, -this.chartHeight - 70);
 
             // X-Axis Label
             textSize(15)

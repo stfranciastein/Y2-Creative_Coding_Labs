@@ -16,7 +16,13 @@ class StackedBarChart {
                 ...Object.fromEntries(this.yValues.map(key => [key, (row[key] / total) * 100]))
             };
         });
+        
+        // For non 100% stacked data. I didn't keep this in because it makes no sense to do with my data I used for 100% stacked.
+        // this.maxValue = Math.max(...this.data.map(row => 
+        //     this.yValues.reduce((sum, key) => sum + row[key], 0)
+        // ));
 
+        // this.scaler = this.chartHeight / this.maxValue;
         this.scaler = this.chartHeight / 100;
 
         this.axisThickness = obj.axisThickness || -1;
