@@ -247,7 +247,7 @@ function cleanData() {
         instrumentalness: (genreStats[genre].instrumentalnessSum / genreStats[genre].count) * 100,
         valence: (genreStats[genre].valenceSum / genreStats[genre].count) * 100,
         energy: (genreStats[genre].energySum / genreStats[genre].count) * 100,
-        loudness: genreStats[genre].loudnessSum / genreStats[genre].count,
+        loudness: (genreStats[genre].loudnessSum / genreStats[genre].count) * 100,
         acousticness: (genreStats[genre].acousticnessSum / genreStats[genre].count) * 100,
         song_count: genreStats[genre].count
     }));
